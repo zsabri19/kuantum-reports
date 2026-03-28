@@ -3,259 +3,176 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kuantum Dashboard</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400@500;600;700&display=swap" rel="stylesheet">
+    <title>Kuantum Dashboard — GCC E-Exhibition</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <style>
         * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
             min-height: 100vh;
-            padding: 30px 20px;
+            padding: 40px 20px;
         }
         .container { max-width: 900px; margin: 0 auto; }
-        .header {
-            text-align: center;
-            margin-bottom: 40px;
-        }
-        .header h1 {
-            font-size: 48px;
-            font-weight: 700;
-            color: white;
-            letter-spacing: -1px;
-        }
-        .header h1 span {
-            background: linear-gradient(135deg, #60a5fa, #a78bfa);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-        }
-        .header p {
-            color: rgba(255,255,255,0.6);
-            margin-top: 10px;
-            font-size: 16px;
-        }
-        .welcome {
-            background: white;
-            padding: 30px;
-            border-radius: 16px;
-            margin-bottom: 30px;
-            box-shadow: 0 8px 30px rgba(0,0,0,0.2);
-        }
-        .welcome h2 {
-            font-size: 24px;
-            color: #1e293b;
-            margin-bottom: 10px;
-        }
-        .welcome p {
-            color: #64748b;
-            font-size: 14px;
-        }
-        .metrics-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
-        .metric-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
+        .header { text-align: center; margin-bottom: 40px; }
+        .header h1 { font-size: 56px; font-weight: 700; color: white; letter-spacing: -1px; }
+        .header h1 span { background: linear-gradient(135deg, #60a5fa, #a78bfa); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .header p { color: rgba(255,255,255,0.6); margin-top: 15px; font-size: 16px; }
+        .header p span { color: #60a5fa; font-weight: 600; }
+
+        .section-title { font-size: 16px; font-weight: 600; color: rgba(255,255,255,0.8); margin: 30px 0 15px; padding-bottom: 8px; border-bottom: 2px solid rgba(255,255,255,0.15); }
+
+        .info-card {
+            background: white; padding: 25px; border-radius: 12px; margin-bottom: 15px;
             box-shadow: 0 4px 15px rgba(0,0,0,0.1);
         }
-        .metric-value { font-size: 28px; font-weight: 700; color: #1e293b; }
+        .info-card h3 { font-size: 16px; color: #1e293b; margin-bottom: 12px; display: flex; align-items: center; gap: 10px; }
+        .info-card h3 .tag { background: #1e293b; color: white; padding: 3px 10px; border-radius: 15px; font-size: 10px; text-transform: uppercase; }
+        .info-card p { color: #475569; font-size: 13px; line-height: 1.6; }
+        .info-card ul { margin: 10px 0 0 20px; color: #475569; font-size: 13px; }
+        .info-card li { margin-bottom: 6px; }
+
+        .metrics-row { display: grid; grid-template-columns: repeat(4, 1fr); gap: 15px; margin-bottom: 30px; }
+        .metric { background: white; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .metric-value { font-size: 32px; font-weight: 700; color: #1e293b; }
         .metric-label { font-size: 11px; color: #64748b; text-transform: uppercase; margin-top: 5px; }
-        .section-title {
-            font-size: 16px;
-            font-weight: 600;
-            color: white;
-            margin-bottom: 15px;
-            padding-bottom: 10px;
-            border-bottom: 2px solid rgba(255,255,255,0.2);
-        }
-        .action-table {
-            width: 100%;
-            background: white;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            margin-bottom: 30px;
-        }
-        .action-table th {
-            background: #1e293b;
-            color: white;
-            padding: 12px 15px;
-            text-align: left;
-            font-size: 11px;
-            text-transform: uppercase;
-        }
-        .action-table td {
-            padding: 12px 15px;
-            border-bottom: 1px solid #f1f5f9;
-            font-size: 13px;
-        }
-        .action-table tr:hover { background: #f8fafc; }
-        .status-badge {
-            padding: 4px 10px;
-            border-radius: 20px;
-            font-size: 10px;
-            font-weight: 600;
-            text-transform: uppercase;
-        }
+
+        .actions-table { width: 100%; background: white; border-radius: 12px; overflow: hidden; box-shadow: 0 4px 15px rgba(0,0,0,0.1); margin-bottom: 30px; }
+        .actions-table th { background: #1e293b; color: white; padding: 12px 15px; text-align: left; font-size: 11px; text-transform: uppercase; }
+        .actions-table td { padding: 12px 15px; border-bottom: 1px solid #f1f5f9; font-size: 13px; }
+        .actions-table tr:last-child td { border-bottom: none; }
+        .actions-table tr:hover { background: #f8fafc; }
+        .status-badge { padding: 4px 10px; border-radius: 20px; font-size: 10px; font-weight: 600; }
         .status-open { background: #fee2e2; color: #991b1b; }
         .status-progress { background: #fef3c7; color: #92400e; }
-        .doc-grid {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
-            margin-bottom: 30px;
-        }
+
+        .doc-grid { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
         .doc-card {
-            background: white;
-            padding: 20px;
-            border-radius: 12px;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
-            text-decoration: none;
-            display: block;
-            text-align: center;
+            background: white; padding: 20px; border-radius: 12px; box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            text-decoration: none; display: flex; align-items: center; gap: 15px;
+            transition: transform 0.2s;
         }
-        .doc-card:hover { transform: translateY(-3px); box-shadow: 0 8px 25px rgba(0,0,0,0.15); }
-        .doc-icon { font-size: 28px; margin-bottom: 8px; }
+        .doc-card:hover { transform: translateY(-3px); }
+        .doc-icon { font-size: 28px; }
         .doc-title { font-size: 14px; font-weight: 600; color: #1e293b; }
-        .doc-desc { font-size: 12px; color: #64748b; margin-top: 3px; }
-        .quick-actions {
-            display: grid;
-            grid-template-columns: repeat(2, 1fr);
-            gap: 15px;
+        .doc-desc { font-size: 12px; color: #64748b; }
+
+        .partners-row { display: grid; grid-template-columns: repeat(3, 1fr); gap: 15px; margin-bottom: 30px; }
+        .partner-card { background: white; padding: 20px; border-radius: 12px; text-align: center; box-shadow: 0 4px 15px rgba(0,0,0,0.1); }
+        .partner-name { font-size: 14px; font-weight: 600; color: #1e293b; }
+        .partner-role { font-size: 12px; color: #64748b; margin-top: 5px; }
+        .partner-status { margin-top: 10px; font-size: 11px; font-weight: 600; padding: 4px 10px; border-radius: 20px; }
+        .status-partnered { background: #dcfce7; color: #166534; }
+        .status-engaged { background: #dbeafe; color: #1e40af; }
+        .status-action { background: #fef3c7; color: #92400e; }
+
+        .quick-links { display: grid; grid-template-columns: repeat(2, 1fr); gap: 15px; }
+        .quick-link {
+            background: rgba(255,255,255,0.1); border: 1px solid rgba(255,255,255,0.2);
+            padding: 15px; border-radius: 10px; text-align: center; color: white;
+            text-decoration: none; font-size: 13px; font-weight: 500;
+            display: flex; align-items: center; justify-content: center; gap: 10px;
         }
-        .quick-action {
-            background: rgba(255,255,255,0.1);
-            border: 1px solid rgba(255,255,255,0.2);
-            padding: 20px;
-            border-radius: 12px;
-            text-align: center;
-            color: white;
-            text-decoration: none;
-            font-weight: 500;
-            display: flex;
-            flex-direction: column;
-            align-items: center;
-        }
-        .quick-action:hover { background: rgba(255,255,255,0.15); }
-        .quick-action span { font-size: 24px; margin-bottom: 8px; }
-        .footer {
-            text-align: center;
-            margin-top: 40px;
-            color: rgba(255,255,255,0.4);
-            font-size: 12px;
-        }
+        .quick-link:hover { background: rgba(255,255,255,0.15); }
+
+        .footer { text-align: center; margin-top: 40px; color: rgba(255,255,255,0.4); font-size: 12px; }
     </style>
 </head>
 <body>
     <div class="container">
         <div class="header">
             <h1>K<span>uantum</span></h1>
-            <p>GCC Digital Exhibition Platform</p>
+            <p>GCC Digital Exhibition Platform — <span>April 2026 Launch</span></p>
         </div>
 
-        <div class="welcome">
-            <h2>Strategic Execution — April 2026</h2>
-            <p>GCC Digital E-Exhibition targeting 500 exhibitors across 6 GCC countries. Partnership with Pakistan Software Export Board secured.</p>
+        <!-- Key Updates -->
+        <div class="section-title">Latest Updates</div>
+
+        <div class="info-card">
+            <h3>PSEDB Partnership — SECURED <span class="tag">New</span></h3>
+            <p>Pakistan Software Export Board has accepted to partner with Kuantum. This government body supervises tech companies in Pakistan — opens direct access to Chamber of Commerce networks across all 6 GCC countries. Regulatory bodies now approachable through their influence.</p>
         </div>
 
-        <div class="metrics-grid">
-            <div class="metric-card">
-                <div class="metric-value">500</div>
-                <div class="metric-label">Target</div>
+        <div class="info-card">
+            <h3>April 2026 GCC E-Exhibition</h3>
+            <p><strong>Target:</strong> 500 exhibitors | <strong>Launch:</strong> April 2026 | <strong>Scope:</strong> GCC-wide (UAE, Saudi, Qatar, Bahrain, Kuwait, Oman)</p>
+            <ul>
+                <li>Vertical scope: Open — multiple industries to maximize traction</li>
+                <li>Technical solution: Ripple (white-label) for immediate deployment</li>
+                <li>Marketing: Bader Al Sawafi (Oman) + Dubai company</li>
+            </ul>
+        </div>
+
+        <!-- Metrics -->
+        <div class="section-title">Key Metrics</div>
+        <div class="metrics-row">
+            <div class="metric"><div class="metric-value">500</div><div class="metric-label">Exhibitor Target</div></div>
+            <div class="metric"><div class="metric-value">April</div><div class="metric-label">Launch Month</div></div>
+            <div class="metric"><div class="metric-value">6</div><div class="metric-label">GCC Countries</div></div>
+            <div class="metric"><div class="metric-value">3</div><div class="metric-label">Open Actions</div></div>
+        </div>
+
+        <!-- Partners -->
+        <div class="section-title">Partner Ecosystem</div>
+        <div class="partners-row">
+            <div class="partner-card">
+                <div class="partner-name">Pakistan Software Export Board</div>
+                <div class="partner-role">Government — Gateway</div>
+                <div class="partner-status status-partnered">Partnered</div>
             </div>
-            <div class="metric-card">
-                <div class="metric-value">April</div>
-                <div class="metric-label">Launch</div>
+            <div class="partner-card">
+                <div class="partner-name">Bader Al Sawafi</div>
+                <div class="partner-role">Digital Marketing (Oman)</div>
+                <div class="partner-status status-engaged">Engaged</div>
             </div>
-            <div class="metric-card">
-                <div class="metric-value">6</div>
-                <div class="metric-label">GCC</div>
-            </div>
-            <div class="metric-card">
-                <div class="metric-value">3</div>
-                <div class="metric-label">Open</div>
+            <div class="partner-card">
+                <div class="partner-name">Ripple</div>
+                <div class="partner-role">White-label Platform</div>
+                <div class="partner-status status-action">Action: Kanwal</div>
             </div>
         </div>
 
-        <h3 class="section-title">Action Items</h3>
-        <table class="action-table">
+        <!-- Action Items -->
+        <div class="section-title">Action Items</div>
+        <table class="actions-table">
             <thead>
-                <tr>
-                    <th>#</th>
-                    <th>Owner</th>
-                    <th>Action</th>
-                    <th>Status</th>
-                    <th>Due</th>
-                </tr>
+                <tr><th>#</th><th>Owner</th><th>Action</th><th>Status</th><th>Due</th></tr>
             </thead>
             <tbody>
-                <tr>
-                    <td>1</td>
-                    <td>Kanwal</td>
-                    <td>Email PSEDB — document engagement</td>
-                    <td><span class="status-badge status-open">Open</span></td>
-                    <td>This week</td>
-                </tr>
-                <tr>
-                    <td>2</td>
-                    <td>Kanwal</td>
-                    <td>Connect with Ripple — technical planning</td>
-                    <td><span class="status-badge status-open">Open</span></td>
-                    <td>This week</td>
-                </tr>
-                <tr>
-                    <td>3</td>
-                    <td>Zeeshan</td>
-                    <td>Close Dubai marketing contact</td>
-                    <td><span class="status-badge status-progress">In Progress</span></td>
-                    <td>—</td>
-                </tr>
+                <tr><td>1</td><td>Kanwal</td><td>Email PSEDB — formalize engagement & contract</td><td><span class="status-badge status-open">Open</span></td><td>This week</td></tr>
+                <tr><td>2</td><td>Kanwal</td><td>Connect Zeeshan with Ripple — technical planning</td><td><span class="status-badge status-open">Open</span></td><td>This week</td></tr>
+                <tr><td>3</td><td>Zeeshan</td><td>Close Dubai marketing contact</td><td><span class="status-badge status-progress">In Progress</span></td><td>—</td></tr>
             </tbody>
         </table>
 
-        <h3 class="section-title">Strategic Documents</h3>
+        <!-- Documents -->
+        <div class="section-title">Documents</div>
         <div class="doc-grid">
             <a href="Kuantum_Meeting_Minutes_March25.html" class="doc-card">
                 <div class="doc-icon">📋</div>
-                <div class="doc-title">Meeting Minutes</div>
-                <div class="doc-desc">March 25, 2026</div>
+                <div>
+                    <div class="doc-title">Meeting Minutes</div>
+                    <div class="doc-desc">March 25, 2026 — Full call documentation</div>
+                </div>
             </a>
             <a href="Kuantum_Strategic_Execution_Brief.html" class="doc-card">
                 <div class="doc-icon">🎯</div>
-                <div class="doc-title">Execution Brief</div>
-                <div class="doc-desc">Full Strategy</div>
-            </a>
-            <a href="https://github.com/zsabri19/kuantum-reports/issues" class="doc-card" target="_blank">
-                <div class="doc-icon">✅</div>
-                <div class="doc-title">Action Tracker</div>
-                <div class="doc-desc">GitHub Issues</div>
-            </a>
-            <a href="https://github.com/zsabri19/kuantum-reports" class="doc-card" target="_blank">
-                <div class="doc-icon">📁</div>
-                <div class="doc-title">Repo</div>
-                <div class="doc-desc">GitHub</div>
+                <div>
+                    <div class="doc-title">Strategic Brief</div>
+                    <div class="doc-desc">Complete strategy for April launch</div>
+                </div>
             </a>
         </div>
 
-        <h3 class="section-title">Quick Actions</h3>
-        <div class="quick-actions">
-            <a href="https://github.com/zsabri19/kuantum-reports/issues?q=is%3Aissue+is%3Aopen+label%3Aaction" class="quick-action" target="_blank">
-                <span>📋</span>
-                View Actions
-            </a>
-            <a href="https://github.com/zsabri19/kuantum-reports/issues/new/choose" class="quick-action" target="_blank">
-                <span>➕</span>
-                New Action
-            </a>
+        <!-- Quick Links -->
+        <div class="section-title">Quick Links</div>
+        <div class="quick-links">
+            <a href="https://github.com/zsabri19/kuantum-reports/issues?q=is%3Aissue+is%3Aopen+label%3Aaction" target="_blank" class="quick-link">✅ View Actions</a>
+            <a href="https://github.com/zsabri19/kuantum-reports/issues/new/choose" target="_blank" class="quick-link">➕ New Action</a>
         </div>
 
         <div class="footer">
-            Kuantum Dashboard — GitHub Issues for tracking
+            Updated: March 28, 2026 | Kuantum Dashboard | GitHub Issues Tracking
         </div>
     </div>
 </body>

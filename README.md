@@ -19,7 +19,7 @@ Strategic documents synced from Google Drive:
 ## Action Tracking
 
 Uses Google Forms for action item updates:
-- https://forms.gle/94JDL6iXJ79xS6Ht7
+- https://github.com/zsabri19/kuantum-reports/issues
 
 ## Users
 

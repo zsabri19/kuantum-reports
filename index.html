@@ -1,0 +1,298 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kuantum Reports - Dashboard</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: linear-gradient(135deg, #0f172a 0%, #1e293b 100%);
+            min-height: 100vh;
+            padding: 40px 20px;
+        }
+        .container { max-width: 900px; margin: 0 auto; }
+        .header {
+            text-align: center;
+            margin-bottom: 40px;
+        }
+        .header h1 {
+            font-size: 42px;
+            font-weight: 700;
+            color: white;
+            letter-spacing: -1px;
+        }
+        .header h1 span {
+            background: linear-gradient(135deg, #60a5fa, #a78bfa);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+        }
+        .header p {
+            color: rgba(255,255,255,0.6);
+            margin-top: 10px;
+            font-size: 16px;
+        }
+        .login-card {
+            background: white;
+            border-radius: 16px;
+            padding: 40px;
+            max-width: 400px;
+            margin: 0 auto 40px;
+            box-shadow: 0 20px 40px rgba(0,0,0,0.3);
+        }
+        .login-card h2 {
+            font-size: 20px;
+            color: #1e293b;
+            margin-bottom: 25px;
+            text-align: center;
+        }
+        .login-input {
+            width: 100%;
+            padding: 15px 20px;
+            border: 2px solid #e2e8f0;
+            border-radius: 10px;
+            font-size: 16px;
+            margin-bottom: 15px;
+            transition: border-color 0.2s;
+        }
+        .login-input:focus {
+            outline: none;
+            border-color: #3b82f6;
+        }
+        .login-btn {
+            width: 100%;
+            padding: 15px;
+            background: linear-gradient(135deg, #1e293b, #0f172a);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-size: 16px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: transform 0.2s;
+        }
+        .login-btn:hover {
+            transform: translateY(-2px);
+        }
+        .section-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: white;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 2px solid rgba(255,255,255,0.2);
+        }
+        .project-card {
+            background: white;
+            padding: 25px;
+            margin-bottom: 20px;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+            transition: transform 0.2s;
+        }
+        .project-card:hover {
+            transform: translateY(-3px);
+        }
+        .project-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 15px;
+        }
+        .project-title {
+            font-size: 18px;
+            font-weight: 600;
+            color: #1e293b;
+        }
+        .status {
+            padding: 5px 12px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-active { background: #dcfce7; color: #166534; }
+        .status-pending { background: #fef3c7; color: #92400e; }
+        .status-critical { background: #fee2e2; color: #991b1b; }
+        .project-meta {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 15px;
+            margin-bottom: 15px;
+        }
+        .meta-item {
+            text-align: center;
+        }
+        .meta-value {
+            font-size: 24px;
+            font-weight: 700;
+            color: #1e293b;
+        }
+        .meta-label {
+            font-size: 11px;
+            color: #64748b;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+        .project-links {
+            display: flex;
+            gap: 10px;
+            margin-top: 15px;
+        }
+        .project-links a {
+            flex: 1;
+            padding: 12px 20px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 13px;
+            font-weight: 600;
+            text-align: center;
+            transition: opacity 0.2s;
+        }
+        .btn-primary {
+            background: #1e293b;
+            color: white;
+        }
+        .btn-secondary {
+            background: #f1f5f9;
+            color: #1e293b;
+        }
+        .btn-accent {
+            background: linear-gradient(135deg, #3b82f6, #2563eb);
+            color: white;
+        }
+        .quick-actions {
+            display: grid;
+            grid-template-columns: repeat(2, 1fr);
+            gap: 15px;
+            margin-top: 30px;
+        }
+        .quick-action {
+            background: rgba(255,255,255,0.1);
+            border: 1px solid rgba(255,255,255,0.2);
+            padding: 20px;
+            border-radius: 12px;
+            text-align: center;
+            color: white;
+            text-decoration: none;
+            font-weight: 500;
+            transition: background 0.2s;
+        }
+        .quick-action:hover {
+            background: rgba(255,255,255,0.15);
+        }
+        .quick-action span {
+            display: block;
+            font-size: 24px;
+            margin-bottom: 8px;
+        }
+        .footer {
+            text-align: center;
+            margin-top: 50px;
+            color: rgba(255,255,255,0.4);
+            font-size: 12px;
+        }
+    </style>
+    <script>
+        function login() {
+            const name = document.getElementById('username').value.trim().toLowerCase();
+            if (name === 'zeeshan' || name === 'kanwal') {
+                window.location.href = 'dashboard.html?user=' + name;
+            } else {
+                alert('Please enter Zeeshan or Kanwal');
+            }
+        }
+    </script>
+</head>
+<body>
+    <div class="container">
+        <div class="header">
+            <h1>K<span>uantum</span></h1>
+            <p>GCC Digital Exhibition Platform</p>
+        </div>
+
+        <div class="login-card">
+            <h2>Sign In</h2>
+            <input type="text" id="username" class="login-input" placeholder="Enter your name (Zeeshan / Kanwal)" onkeypress="if(event.key==='Enter')login()">
+            <button class="login-btn" onclick="login()">Enter Dashboard</button>
+        </div>
+
+        <h2 class="section-title">Strategic Documents</h2>
+
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-title">Meeting Minutes — March 25</div>
+                <span class="status status-active">Action Items Open</span>
+            </div>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-value">3</div>
+                    <div class="meta-label">Open Actions</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-value">2</div>
+                    <div class="meta-label">Kanwal</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-value">1</div>
+                    <div class="meta-label">Zeeshan</div>
+                </div>
+            </div>
+            <div class="project-links">
+                <a href="Kuantum_Meeting_Minutes_March25.html" class="project-links btn-primary">📊 View Report</a>
+                <a href="https://forms.gle/94JDL6iXJ79xS6Ht7" target="_blank" class="project-links btn-accent">📝 Update Actions</a>
+            </div>
+        </div>
+
+        <div class="project-card">
+            <div class="project-header">
+                <div class="project-title">Strategic Execution Brief</div>
+                <span class="status status-active">Active</span>
+            </div>
+            <div class="project-meta">
+                <div class="meta-item">
+                    <div class="meta-value">500</div>
+                    <div class="meta-label">Exhibitor Target</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-value">April '26</div>
+                    <div class="meta-label">Launch Date</div>
+                </div>
+                <div class="meta-item">
+                    <div class="meta-value">6</div>
+                    <div class="meta-label">GCC Countries</div>
+                </div>
+            </div>
+            <div class="project-links">
+                <a href="Kuantum_Strategic_Execution_Brief.html" class="project-links btn-primary">📊 View Report</a>
+                <a href="Kuantum_competitive_analysis_presentation.html" class="project-links btn-secondary">📈 Competitive</a>
+            </div>
+        </div>
+
+        <div class="quick-actions">
+            <a href="Kuantum_Meeting_Minutes_March25.html" class="quick-action">
+                <span>📋</span>
+                Meeting Minutes
+            </a>
+            <a href="Kuantum_Strategic_Execution_Brief.html" class="quick-action">
+                <span>🎯</span>
+                Strategy Brief
+            </a>
+            <a href="Kuantum_competitive_analysis_presentation.html" class="quick-action">
+                <span>📊</span>
+                Competitive Analysis
+            </a>
+            <a href="https://forms.gle/94JDL6iXJ79xS6Ht7" target="_blank" class="quick-action">
+                <span>✅</span>
+                Action Tracker
+            </a>
+        </div>
+
+        <div class="footer">
+            Kuantum Dashboard — Powered by ClarityOS
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,488 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Strategic Execution Brief — March 2026</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <style>
+        * { margin: 0; padding: 0; box-sizing: border-box; }
+        body {
+            font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f5f5f5;
+            color: #1a1a1a;
+            line-height: 1.6;
+            font-size: 14px;
+            padding: 40px 20px;
+        }
+        .page {
+            max-width: 800px;
+            margin: 0 auto;
+            background: white;
+            border-radius: 12px;
+            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            overflow: hidden;
+        }
+        .header {
+            background: linear-gradient(135deg, #1a1a1a 0%, #333333 100%);
+            color: white;
+            padding: 35px 40px;
+        }
+        .header h1 {
+            font-size: 22px;
+            font-weight: 600;
+            letter-spacing: -0.5px;
+        }
+        .header-meta {
+            margin-top: 10px;
+            font-size: 12px;
+            color: rgba(255,255,255,0.7);
+        }
+        .purpose {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .purpose-label {
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1.5px;
+            color: #666;
+            margin-bottom: 6px;
+        }
+        .purpose p {
+            font-size: 15px;
+            color: #333;
+        }
+        .content {
+            padding: 30px 40px;
+        }
+        .section {
+            margin-bottom: 35px;
+        }
+        .section-title {
+            font-size: 13px;
+            font-weight: 600;
+            color: #1a1a1a;
+            padding-bottom: 10px;
+            border-bottom: 2px solid #1a1a1a;
+            margin-bottom: 15px;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+        .section-number {
+            background: #1a1a1a;
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 12px;
+            font-weight: 600;
+        }
+        .info-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .info-table th {
+            text-align: left;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            padding: 8px 0;
+            border-bottom: 1px solid #e5e5e5;
+        }
+        .info-table td {
+            padding: 12px 0;
+            border-bottom: 1px solid #f0f0f0;
+            font-size: 14px;
+        }
+        .highlight {
+            background: #e8f5e9;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #2e7d32;
+        }
+        .highlight-blue {
+            background: #e3f2fd;
+            padding: 4px 8px;
+            border-radius: 4px;
+            font-size: 12px;
+            font-weight: 500;
+            color: #1565c0;
+        }
+        /* Two column grid */
+        .two-col {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+        .col-card {
+            background: #fafafa;
+            padding: 20px;
+            border-radius: 8px;
+            border-left: 3px solid #1a1a1a;
+        }
+        .col-card h4 {
+            font-size: 12px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: #666;
+            margin-bottom: 10px;
+        }
+        .col-card p {
+            font-size: 13px;
+            color: #333;
+        }
+        /* Messaging box */
+        .message-box {
+            background: #1a1a1a;
+            color: white;
+            padding: 20px;
+            border-radius: 8px;
+            margin-bottom: 12px;
+        }
+        .message-box h4 {
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            color: rgba(255,255,255,0.6);
+            margin-bottom: 8px;
+        }
+        .message-box p {
+            font-size: 14px;
+            font-style: italic;
+            line-height: 1.5;
+        }
+        /* Action table */
+        .action-table {
+            width: 100%;
+            border-collapse: collapse;
+        }
+        .action-table th {
+            background: #1a1a1a;
+            color: white;
+            text-align: left;
+            font-size: 10px;
+            font-weight: 600;
+            text-transform: uppercase;
+            letter-spacing: 1px;
+            padding: 12px 15px;
+        }
+        .action-table td {
+            padding: 12px 15px;
+            border-bottom: 1px solid #e5e5e5;
+            font-size: 13px;
+        }
+        .action-table tr:nth-child(even) { background: #fafafa; }
+        .action-number {
+            display: inline-block;
+            width: 22px;
+            height: 22px;
+            background: #1a1a1a;
+            color: white;
+            border-radius: 50%;
+            text-align: center;
+            font-size: 11px;
+            font-weight: 600;
+            line-height: 22px;
+        }
+        .status-open {
+            background: #ffebee;
+            color: #c62828;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-progress {
+            background: #fff3e0;
+            color: #e65100;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        .status-partnered {
+            background: #e8f5e9;
+            color: #2e7d32;
+            padding: 4px 10px;
+            border-radius: 20px;
+            font-size: 11px;
+            font-weight: 600;
+            text-transform: uppercase;
+        }
+        /* Timeline */
+        .timeline-item {
+            display: flex;
+            align-items: flex-start;
+            gap: 15px;
+            padding: 12px 0;
+            border-bottom: 1px solid #eee;
+        }
+        .timeline-item:last-child { border-bottom: none; }
+        .timeline-phase {
+            font-size: 11px;
+            font-weight: 600;
+            color: #1a1a1a;
+            min-width: 30px;
+        }
+        .timeline-content {
+            font-size: 13px;
+            color: #444;
+        }
+        .timeline-date {
+            font-size: 11px;
+            color: #888;
+            margin-top: 3px;
+        }
+        /* Footer */
+        .footer {
+            background: #f8f9fa;
+            padding: 20px 40px;
+            border-top: 1px solid #e5e5e5;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+        .footer-left {
+            font-size: 12px;
+            color: #666;
+        }
+        .footer-right {
+            font-size: 11px;
+            color: #999;
+            font-style: italic;
+        }
+        @media print {
+            body { background: white; padding: 0; }
+            .page { box-shadow: none; }
+        }
+    </style>
+</head>
+<body>
+    <div class="page">
+        <div class="header">
+            <h1>Strategic Execution Brief</h1>
+            <div class="header-meta">GCC E-Exhibition Launch — April 2026 | Prepared by Sofia</div>
+        </div>
+
+        <div class="purpose">
+            <div class="purpose-label">Purpose</div>
+            <p>Consolidate strategic context, action items, and messaging for Kuantum's GCC market entry.</p>
+        </div>
+
+        <div class="content">
+            <!-- Section 1: Partnership -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">1</span>
+                    Partnership — PSEDB
+                </div>
+                <table class="info-table">
+                    <tr>
+                        <th style="width: 120px;">Partner</th>
+                        <td>Pakistan Software Export Board (PSEDB)</td>
+                    </tr>
+                    <tr>
+                        <th>Type</th>
+                        <td>Government body — supervises tech companies</td>
+                    </tr>
+                    <tr>
+                        <th>Secured</th>
+                        <td><span class="highlight">March 25, 2026</span></td>
+                    </tr>
+                    <tr>
+                        <th>Value</th>
+                        <td>Direct access to Chamber of Commerce in all 6 GCC countries</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Section 2: Event -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">2</span>
+                    Event Parameters
+                </div>
+                <table class="info-table">
+                    <tr>
+                        <th style="width: 120px;">Launch</th>
+                        <td><strong>April 2026</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Exhibitors</th>
+                        <td><strong>500 companies</strong></td>
+                    </tr>
+                    <tr>
+                        <th>Geography</th>
+                        <td>GCC-wide (UAE, Saudi, Qatar, Bahrain, Kuwait, Oman)</td>
+                    </tr>
+                    <tr>
+                        <th>Vertical</th>
+                        <td>Open — multiple industries</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Section 3: Competitive -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">3</span>
+                    Competitive Position
+                </div>
+                <div class="two-col">
+                    <div class="col-card">
+                        <h4>Kuantum</h4>
+                        <p>Immersive virtual trade fair<br>7-day deployment<br>G2G crisis architecture<br>President of Pakistan proof<br>AI + dialects</p>
+                    </div>
+                    <div class="col-card">
+                        <h4>They (Cvent, Whova...)</h4>
+                        <p>Webinars / webcasts<br>Weeks / months<br>Not offered<br>No proof<br>Limited</p>
+                    </div>
+                </div>
+                <table class="info-table" style="margin-top: 15px;">
+                    <tr>
+                        <th style="width: 120px;">Proof Points</th>
+                        <td>2022 Abitak Pakistan — President attended | 60 exhibitors | 30% paid | ₹6M (~$70K) bookings</td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Section 4: Partners -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">4</span>
+                    Partner Ecosystem
+                </div>
+                <table class="info-table">
+                    <tr>
+                        <th style="width: 160px;">PSEDB</th>
+                        <td>Government gateway</td>
+                        <td><span class="status-partnered">Partnered</span></td>
+                    </tr>
+                    <tr>
+                        <th>Bader Al Sawafi</th>
+                        <td>Digital marketing (Oman)</td>
+                        <td><span class="highlight-blue">Engaged</span></td>
+                    </tr>
+                    <tr>
+                        <th>Ripple</th>
+                        <td>White-label platform</td>
+                        <td><span class="status-open">Action: Kanwal</span></td>
+                    </tr>
+                    <tr>
+                        <th>Dubai company</th>
+                        <td>Digital marketing</td>
+                        <td><span class="status-progress">Awaiting intro</span></td>
+                    </tr>
+                </table>
+            </div>
+
+            <!-- Section 5: Messaging -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">5</span>
+                    Messaging
+                </div>
+                <div class="message-box">
+                    <h4>Exhibitors</h4>
+                    <p>"Your event doesn't have to die. We launch digital exhibitions in 7 days."</p>
+                </div>
+                <div class="message-box">
+                    <h4>Event Management</h4>
+                    <p>"White-label model. Revenue-share. Proven traction — no development delay."</p>
+                </div>
+                <div class="message-box">
+                    <h4>Investors / VCs</h4>
+                    <p>"$70K+ bookings. 500-target pipeline. One white-label model — infinite scale."</p>
+                </div>
+            </div>
+
+            <!-- Section 6: Timeline -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">6</span>
+                    Timeline
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-phase">P1</span>
+                    <div>
+                        <div class="timeline-content">Oman Gateway — event bodies, agencies, associations</div>
+                        <div class="timeline-date">Q2 2026</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-phase">P2</span>
+                    <div>
+                        <div class="timeline-content">GCC Expansion — KSA, UAE, Qatar, Bahrain, Kuwait</div>
+                        <div class="timeline-date">Q3-Q4 2026</div>
+                    </div>
+                </div>
+                <div class="timeline-item">
+                    <span class="timeline-phase">P3</span>
+                    <div>
+                        <div class="timeline-content">Corporate Digital Campus — always-on</div>
+                        <div class="timeline-date">2027</div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Section 7: Action Items -->
+            <div class="section">
+                <div class="section-title">
+                    <span class="section-number">7</span>
+                    Action Items
+                </div>
+                <table class="action-table">
+                    <thead>
+                        <tr>
+                            <th style="width: 40px;">#</th>
+                            <th style="width: 100px;">Owner</th>
+                            <th>Action</th>
+                            <th style="width: 120px;">Status</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td><span class="action-number">1</span></td>
+                            <td>Kanwal</td>
+                            <td>Email PSEDB — document engagement, start contract</td>
+                            <td><span class="status-open">Open</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="action-number">2</span></td>
+                            <td>Kanwal</td>
+                            <td>Connect Zeeshan with Ripple — technical planning</td>
+                            <td><span class="status-open">Open</span></td>
+                        </tr>
+                        <tr>
+                            <td><span class="action-number">3</span></td>
+                            <td>Zeeshan</td>
+                            <td>Close Dubai marketing contact</td>
+                            <td><span class="status-progress">In Progress</span></td>
+                        </tr>
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+        <div class="footer">
+            <div class="footer-left">Prepared by: Sofia</div>
+            <div class="footer-right">Structure creates clarity. Clarity creates action.</div>
+        </div>
+    </div>
+</body>
+</html>
